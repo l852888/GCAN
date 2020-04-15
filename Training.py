@@ -109,6 +109,6 @@ Adam=keras.optimizers.Adam(lr=0.001, beta_1=0.9, beta_2=0.999, epsilon=None, dec
 model.compile(optimizer=Adam,loss="binary_crossentropy",metrics=['accuracy', f1_score,precision,recall])
 from keras.callbacks import EarlyStopping
 early_stopping = EarlyStopping(monitor='val_loss', patience=5, verbose=2)
-history=model.fit([np.array(WX_train),np.array(X_train),np.array(cnnX_train),np.array(MX_train)],np.array(y_train),epochs=50,validation_split=0.1)
+history=model.fit([np.array(WX_train),np.array(X_train),np.array(cnnX_train),np.array(MX_train)],np.array(y_train),epochs=50,validation_split=0.1, callbacks=[early_stopping])
 scores=model.evaluate([np.array(WX_test),np.array(X_test),np.array(cnnX_test),np.array(MX_test)],np.array(y_test), verbose=0)
 
