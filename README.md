@@ -12,7 +12,9 @@ Due to the privacy, we can not provide the data we crawled from the API.
 Requirements
 ------------------
 python >=3.5
+
 Keras
+
 scklearn,pandas,numpy
 
 Model
@@ -22,4 +24,5 @@ provide the code of GCN and dual co-attention layer
 Training
 ---------------------
 provide the complete GCAN training
+
 configuration file shows the hyperparameter setting of GCAN
