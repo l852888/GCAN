@@ -1,0 +1,21 @@
+[Data]
+*Two well-known datasets Twitter15,Twitter16, complied by Ma et al. (2017)
+Jing Ma, Wei Gao, and Kam Fai Wong. 2017. Detect rumors in microblog posts using propagation structure
+via kernel learning. In ACL 2017 - 55th Annual Meeting of the Association for Computational Linguistics, Proceedings of the Conference,)
+
+*Each dataset contains a collection of source tweets, along with their corresponding sequences of retweet users.
+*We choose only “true” and “fake” labels as the ground truth.
+*we use user IDs to crawl user information via Twitter API.
+
+[Training]
+*model name:GCAN
+*optimizer=Adam
+*training size=random 70%, testing size=30%
+*learning rate=0.001
+*epochs=50
+*number of retweet users=40
+*word embedding dim=32
+*GRU output dim=32
+*1-D CNN output filter size = 3
+*1-D CNN output dim =32
+*GCN output dim = 32
