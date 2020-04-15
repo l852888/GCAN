@@ -14,9 +14,11 @@ Requirements
 python >=3.5
 Keras
 scklearn,pandas,numpy
+
 Model
 -----------------
 provide the code of GCN and dual co-attention layer 
+
 Training
 ---------------------
 provide the complete GCAN training
