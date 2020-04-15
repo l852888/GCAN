@@ -58,8 +58,9 @@ def recall(y_true, y_pred):
 y=pd.read_csv(r".csv")
 y=y[0:dataset size]
 from sklearn.model_selection import train_test_split
-X_train,X_test,y_train,y_test=train_test_split(data,y,test_size=0.3,random_state= )
+X_train,X_test,y_train,y_test=train_test_split(data_all,y,test_size=0.3,random_state= )
 WX_train,WX_test,y_train,y_test=train_test_split(padded_docs,y,test_size=0.3,random_state= )
+MX_train,MX_test,y_train,y_test=train_test_split(graph_conv_filters,y,test_size=0.3,random_state=)
     
 cnnX_train=np.reshape(X_train,(training size,retweet user size,number of feature,1))
 cnnX_test=np.reshape(X_test,(testing size,retweet user size,number of feature,1))
