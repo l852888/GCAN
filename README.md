@@ -1,6 +1,6 @@
 # GCAN: Graph-aware Co-Attention Networks for Explainable Fake News Detection on Social Media
 ![GCAN](https://github.com/l852888/GCAN/blob/master/figure/model.PNG)
-We develop a novel model, Graph-aware Co-Attention Networks (GCAN), to predict fake news based on the source tweet and its propagation basedusers. 
+We develop a novel model, Graph-aware Co-Attention Networks (GCAN), to predict fake news based on the source tweet and its propagation based users. 
 
 GCAN consists of five components. 
 * The first is user characteristics extraction: creating features to quantify how a user participates in online social networking. 
