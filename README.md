@@ -8,9 +8,10 @@ GCAN consists of five components.
 * The third is user propagation representation: modeling and representing how the source tweet propagates by users using their extracted characteristics.
 * The fourth is dual co-attention mechanisms: capturing the correlation between the source tweet and users’ interactions/propagation. 
 * The last is making prediction: generating the detection outcome by concatenating all learned representations.
+
 Reference
 ------------------
-
+We will provide later.
 Datasets
 ------------------
 Two well-known datasets compiled by Ma et al. (2017), Twitter15 and Twitter16, are utilized. Each dataset contains a collection of source tweets, along with their corresponding sequences of retweet users. We choose only “true” and “fake” labels as the ground truth. Since the original data does not contain user profiles, we use user IDs to crawl user information via Twitter API.
