@@ -33,6 +33,6 @@ provide the code of GCN and dual co-attention layer
 
 Training
 ---------------------
-provide the complete GCAN training
+provide the complete GCAN training 
 
 configuration file shows the hyperparameter setting of GCAN
