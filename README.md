@@ -7,7 +7,7 @@ GCAN consists of five components.
 * The second is new story encoding: generating the representation of words in the source tweet. 
 * The third is user propagation representation: modeling and representing how the source tweet propagates by users using their extracted characteristics.
 * The fourth is dual co-attention mechanisms: capturing the correlation between the source tweet and users’ interactions/propagation. 
-* The last ismaking prediction: generating the detection outcome by concatenating all learned representations.
+* The last is making prediction: generating the detection outcome by concatenating all learned representations.
 Reference
 ------------------
 
