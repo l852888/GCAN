@@ -27,7 +27,15 @@ Requirements
 ------------------
 python >=3.5
 
-Keras
+Keras 2.2.4
 
-scklearn,pandas,numpy
+scikit-learn 0.21
+
+pandas 0.23.0
+
+numpy 1.14.3
+
+Citation
+------------------------
+Yi-Ju Lu and Cheng-Te Li. "GCAN: Graph-aware Co-Attention Networks for Explainable Fake News Detection on Social Media" The Annual Meeting of the Association for Computational Linguistics,ACL2020.
 
