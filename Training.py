@@ -6,7 +6,7 @@
 
 #data preparation
 matrix=cos
-graph_conv_filters=preprocess_adj_tensor_with_identity(matrix)
+graph_conv_filters=preprocess_adj_tensor(matrix)
 
 #evaluation
 def f1_score(y_true, y_pred):
