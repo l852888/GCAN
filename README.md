@@ -39,3 +39,5 @@ Citation
 ------------------------
 Yi-Ju Lu and Cheng-Te Li. "GCAN: Graph-aware Co-Attention Networks for Explainable Fake News Detection on Social Media" The Annual Meeting of the Association for Computational Linguistics,ACL2020.
 
+https://arxiv.org/abs/2004.11648?fbclid=IwAR2BCyJE4K4UqGY5l_f3VSj-VoFjidfWJPIG6SLQiPytNGdWhE1pdsnKmmM
+
