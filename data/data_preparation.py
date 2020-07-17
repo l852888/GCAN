@@ -1,8 +1,10 @@
 
 # coding: utf-8
 
-# In[ ]:
+# In[ ]
 
+#data size: the total number of data you want to put in the model( for example: twitter15 is 742)
+#retweet user size: the length of retweet propagation you want to utilize( in the paper I use 40 retweet users)
 
 ##read the Data 
 import numpy as np
@@ -70,13 +72,15 @@ for j in data_all:
         adj.append(similar)
     cos.append(adj)
 
+ 
 #encode the news content
 import pandas as pd
 import numpy as np
 with open(r".txt", 'r') as f: # read all the news content 
     next(f)
     contents = f.readlines()
-    
+
+#vocab_size: how many different words in the news content  
 from keras.preprocessing.text import one_hot
 vocab_size=
 encoded_docs=[one_hot(d,vocab_size) for d in contents]
