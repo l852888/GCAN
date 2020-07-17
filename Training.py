@@ -69,13 +69,13 @@ num_filters = 1
 
 
 #source tweet encoding
-winput=Input(shape=(source_tweet_length,))
+winput=Input(shape=(source_tweet_length,)) #source_tweet_length:in the paper is 40
 wembed=Embedding(vocab_size,source_tweet_output_dim,input_length=source_tweet_length)(winput)
-wembed=Reshape((source_tweet_length,source_tweet_output_dim))(wembed)
+wembed=Reshape((source_tweet_length,source_tweet_output_dim))(wembed)  #source_tweet_output_dim: define by yourself
 wembed=GRU(source_tweet_output_dim,return_sequences=True)(wembed)
 
 #user propagation representation
-rmain_input =Input(shape=(retweet_user_size,number of feature))
+rmain_input =Input(shape=(retweet_user_size,number of feature)) #number of feature: in the paper is 10
 rnnencoder=GRU(output_dim,return_sequences=True)(rmain_input)
 rnnoutput1= AveragePooling1D(retweet_user_size)(rnnencoder)
 rnnoutput=Flatten()(rnnoutput1)
