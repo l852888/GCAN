@@ -209,7 +209,7 @@ class coattention(Layer):
                                       shape=(source tweet output dim,1),
                                       initializer='uniform',
                                       trainable=True)
-        super(coattention, self).build(input_shape)  # 一定要在最后调用它
+        super(coattention, self).build(input_shape)  
 
 
     def call(self, x):
@@ -268,7 +268,7 @@ class cocnnattention(Layer):
 
     def build(self, input_shape):
         
-        # 为该层创建一个可训练的权重
+        
         self.kernelW = self.add_weight(name='Wall', 
                                       shape=(source tweet output dim, cnn output dim),
                                       initializer='uniform',
@@ -289,7 +289,7 @@ class cocnnattention(Layer):
                                       shape=(source tweet output dim,1),
                                       initializer='uniform',
                                       trainable=True)
-        super(cocnnattention, self).build(input_shape)  # 一定要在最后调用它
+        super(cocnnattention, self).build(input_shape)  
 
 
     def call(self, x):
