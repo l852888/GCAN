@@ -19,7 +19,7 @@ def f1_score(y_true, y_pred):
     
     p = tp / (tp + fp + K.epsilon())
     r = tp / (tp + fn + K.epsilon())
-    #计算f1
+    
     f1 = 2*p*r / (p+r+K.epsilon())
     f1 = tf.where(tf.is_nan(f1), tf.zeros_like(f1), f1)
     return f1
