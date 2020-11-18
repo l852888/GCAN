@@ -3,8 +3,10 @@
 
 # In[ ]
 
-#data size: the total number of data you want to put in the model( for example: twitter15 is 742)
-#retweet user size: the length of retweet propagation you want to utilize( in the paper I use 40 retweet users)
+#data_size: the total number of data you want to put in the model( for example: twitter15 is 742)
+#retweet_user_size: the length of retweet propagation you want to utilize( in the paper we use 40 retweet users)
+data_size=742
+retweet_user_size=40
 
 ##read the Data 
 import numpy as np
@@ -13,7 +15,7 @@ path=r""
 files= os.listdir(path)
 a=[]
 k=[]
-for file in range(0,data size):
+for file in range(0,data_size):
     f = open(r"{}.txt".format(file))
     results=[]
     k.append(file)    
@@ -28,18 +30,18 @@ for file in range(0,data size):
 import random
 from sklearn import preprocessing
 data_all=[]
-for i in range(0,data size):
-    if len(a[i])>=rewteet user size:
-        k=a[i][0:rewteet user size]
+for i in range(0,data_size):
+    if len(a[i])>=rewteet_user_size:
+        k=a[i][0:rewteet_user_size]
         
         data_all.append(k)
     else:
         a[i]=np.asarray(a[i])
-        q=a[i][np.random.choice(a[i].shape[0],rewteet user size,replace=True),:]
+        q=a[i][np.random.choice(a[i].shape[0],rewteet_user_size,replace=True),:]
         q=q.tolist()
         a[i]=a[i].tolist()
         k=a[i].extend(q)
-        k=a[i][0:rewteet user size]
+        k=a[i][0:rewteet_user_size]
         
         data_all.append(k)
         
@@ -54,13 +56,13 @@ for j in data_all:
     adj=[]
     data=pd.read_csv(data_all[j])
     
-    for i in range(0,retweet user size):
+    for i in range(0,retweet_user_size):
         a=data.iloc[i,:]
         a=np.array(a)
         a=a.reshape(1,-1)
         similar=[]
         
-        for k in range(0,retweet user size):
+        for k in range(0,retweet_user_size):
             b=data.iloc[k,:]
             b=np.array(b)
             b=b.reshape(1,-1)
