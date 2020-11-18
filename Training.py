@@ -52,11 +52,11 @@ def recall(y_true, y_pred):
     f1 = 2*p*r / (p+r+K.epsilon())
     f1 = tf.where(tf.is_nan(f1), tf.zeros_like(f1), f1)
     return r
-#=======================================================================================#
-##==start to build and train GCAN model==##
+#==============================================================================================================#
+##==Start to build and train GCAN model (need to run data_preparation.py and GCAN.py first.)=======##
 
 #data preparation
-matrix=cos   #cos is calculated from data_preparation.py, use the user profile to calculate their cosine similarity for building the graph
+matrix=cos   #cos is calculated from data_preparation.py, use the user profile to calculate their cosine similarity for building the graph.
 graph_conv_filters=preprocess_adj_tensor(matrix)
 y=pd.read_csv(r".csv")
 y=y[0:data_size]
