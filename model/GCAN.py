@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[ ]:
+##=====for here, we define some model functions to be utilized at the Training.py============##
 
 
 ##graph convolution network
@@ -175,6 +175,14 @@ class MultiGraphCNN(Layer):
 
     
 
+source_tweet_output_dim=32
+source_tweet_length=30
+number of feature=10
+cnn_output_dim=32
+cnn_output_length=38
+filter_size=10
+co_attention_output_dim=64
+output_dim=32
 
 ##Dual Co-Attention: source tweet and graph-aware interaction embeddings
 from keras import backend as k
@@ -190,23 +198,23 @@ class coattention(Layer):
         
         
         self.kernelW = self.add_weight(name='Wall', 
-                                      shape=(source tweet output dim, GCN output dim),
+                                      shape=(source_tweet_output_dim, GCN_output_dim),
                                       initializer='uniform',
                                       trainable=True)
         self.kernelWs = self.add_weight(name='Ws', 
-                                      shape=(rewteet user size,rewteet user size),
+                                      shape=(rewteet_user_size,rewteet_user_size),
                                       initializer='uniform',
                                       trainable=True)
         self.kernelWc = self.add_weight(name='Wc', 
-                                      shape=(source tweet length,source tweet length),
+                                      shape=(source_tweet_length,source_tweet_length),
                                       initializer='uniform',
                                       trainable=True)
         self.kernelas = self.add_weight(name='Was', 
-                                      shape=(GCN output dim,1),
+                                      shape=(GCN_output_dim,1),
                                       initializer='uniform',
                                       trainable=True)
         self.kernelac = self.add_weight(name='Wac', 
-                                      shape=(source tweet output dim,1),
+                                      shape=(source_tweet_output_dim,1),
                                       initializer='uniform',
                                       trainable=True)
         super(coattention, self).build(input_shape)  
@@ -270,23 +278,23 @@ class cocnnattention(Layer):
         
         
         self.kernelW = self.add_weight(name='Wall', 
-                                      shape=(source tweet output dim, cnn output dim),
+                                      shape=(source_tweet_output_dim, cnn_output_dim),
                                       initializer='uniform',
                                       trainable=True)
         self.kernelWs = self.add_weight(name='Ws', 
-                                      shape=(cnn output length, cnn output length),
+                                      shape=(cnn_output_length, cnn_output_length),
                                       initializer='uniform',
                                       trainable=True)
         self.kernelWc = self.add_weight(name='Wc', 
-                                      shape=(source tweet length, source tweet length),
+                                      shape=(source_tweet_length, source_tweet_length),
                                       initializer='uniform',
                                       trainable=True)
         self.kernelas = self.add_weight(name='Was', 
-                                      shape=(cnn output dim,1),
+                                      shape=(cnn_output_dim,1),
                                       initializer='uniform',
                                       trainable=True)
         self.kernelac = self.add_weight(name='Wac', 
-                                      shape=(source tweet output dim,1),
+                                      shape=(source_tweet_output_dim,1),
                                       initializer='uniform',
                                       trainable=True)
         super(cocnnattention, self).build(input_shape)  
