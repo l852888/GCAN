@@ -78,22 +78,22 @@ y_test= y_test.astype('int')
 num_filters = 1
 source_tweet_output_dim=32
 source_tweet_length=30
-number of feature=10
+number_of_feature=10
 cnn_output_dim=32
 cnn_output_length=38
-filter_size=10
+filter_size=3
 co_attention_output_dim=64
 output_dim=32
 
 
 #source tweet encoding
-winput=Input(shape=(source_tweet_length,)) #source_tweet_length:in the paper is 
+winput=Input(shape=(source_tweet_length,)) #source_tweet_length:in the paper is 30
 wembed=Embedding(vocab_size,source_tweet_output_dim,input_length=source_tweet_length)(winput)
 wembed=Reshape((source_tweet_length,source_tweet_output_dim))(wembed)  #source_tweet_output_dim: define by yourself
 wembed=GRU(source_tweet_output_dim,return_sequences=True)(wembed)
 
 #user propagation representation
-rmain_input =Input(shape=(retweet_user_size,number of feature)) #number of feature: in the paper is 10, retweet_user_size: in the paper is 40
+rmain_input =Input(shape=(retweet_user_size,number_of_feature)) #number_of_feature: in the paper is 10, retweet_user_size: in the paper is 40
 rnnencoder=GRU(output_dim,return_sequences=True)(rmain_input)
 rnnoutput1= AveragePooling1D(retweet_user_size)(rnnencoder)
 rnnoutput=Flatten()(rnnoutput1)
@@ -107,8 +107,8 @@ gmain_input= MultiGraphCNN(GCN_output_dim, num_filters)([gmain_input, graph_conv
 gco=coattention(co_attention_output_dim)([wembed,gmain_input])
 gco=Flatten()(gco)
     
-cmain_input=Input(shape=(retweet_user_size,number of feature,1))
-cnnco=Conv2D(cnn_output_dim,filter_size,number of feature,activation="sigmoid")(cmain_input)
+cmain_input=Input(shape=(retweet_user_size,number_of_feature,1))
+cnnco=Conv2D(cnn_output_dim,filter_size,number_of_feature,activation="sigmoid")(cmain_input)
 maxpooling=Reshape((cnn_output_length,cnn_output_dim))(cnnco)
 co=cocnnattention(co_attention_output_dim)([wembed,maxpooling])
 co=Flatten()(co)
