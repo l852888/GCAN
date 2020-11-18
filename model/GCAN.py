@@ -180,7 +180,7 @@ source_tweet_length=30
 number of feature=10
 cnn_output_dim=32
 cnn_output_length=38
-filter_size=10
+filter_size=3
 co_attention_output_dim=64
 output_dim=32
 
