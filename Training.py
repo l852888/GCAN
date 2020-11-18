@@ -59,7 +59,7 @@ def recall(y_true, y_pred):
 matrix=cos   #cos is calculated from data_preparation.py, use the user profile to calculate their cosine similarity for building the graph
 graph_conv_filters=preprocess_adj_tensor(matrix)
 y=pd.read_csv(r".csv")
-y=y[0:dataset_size]
+y=y[0:data_size]
 
 from sklearn.model_selection import train_test_split
 X_train,X_test,y_train,y_test=train_test_split(data_all,y,test_size=0.3,random_state= )
@@ -117,7 +117,7 @@ merged_vector=keras.layers.concatenate([co,gco,rnnoutput])
 x=Dense(output_dim,activation="relu")(merged_vector)
 x=Dense(output_dim,activation="relu")(x)
 x=Dense(output_dim,activation="relu")(x)
-prediction=Dense(2,activation="softmax")(x) #Here is output:class{0,1}
+prediction=Dense(2,activation="softmax")(x) #Here is the final output:class{0,1}
     
 model=Model([winput,rmain_input,cmain_input, graph_conv_filters_input],prediction)
 model.summary()
