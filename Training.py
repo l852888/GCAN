@@ -59,7 +59,7 @@ def recall(y_true, y_pred):
 matrix=cos   #cos is calculated from data_preparation.py, use the user profile to calculate their cosine similarity for building the graph
 graph_conv_filters=preprocess_adj_tensor(matrix)
 y=pd.read_csv(r".csv")
-y=y[0:dataset size]
+y=y[0:dataset_size]
 
 from sklearn.model_selection import train_test_split
 X_train,X_test,y_train,y_test=train_test_split(data_all,y,test_size=0.3,random_state= )
@@ -76,10 +76,18 @@ y_test= to_categorical(y_test,2)
 y_test= y_test.astype('int')
     
 num_filters = 1
+source_tweet_output_dim=32
+source_tweet_length=30
+number of feature=10
+cnn_output_dim=32
+cnn_output_length=38
+filter_size=10
+co_attention_output_dim=64
+output_dim=32
 
 
 #source tweet encoding
-winput=Input(shape=(source_tweet_length,)) #source_tweet_length:in the paper is 40
+winput=Input(shape=(source_tweet_length,)) #source_tweet_length:in the paper is 
 wembed=Embedding(vocab_size,source_tweet_output_dim,input_length=source_tweet_length)(winput)
 wembed=Reshape((source_tweet_length,source_tweet_output_dim))(wembed)  #source_tweet_output_dim: define by yourself
 wembed=GRU(source_tweet_output_dim,return_sequences=True)(wembed)
@@ -96,13 +104,13 @@ gmain_input= MultiGraphCNN(GCN_output_dim, num_filters)([rmain_input, graph_conv
 gmain_input= MultiGraphCNN(GCN_output_dim, num_filters)([gmain_input, graph_conv_filters_input])
 
 #dual co attention
-gco=coattention(co_attention output dim)([wembed,gmain_input])
+gco=coattention(co_attention_output_dim)([wembed,gmain_input])
 gco=Flatten()(gco)
     
 cmain_input=Input(shape=(retweet_user_size,number of feature,1))
 cnnco=Conv2D(cnn_output_dim,filter_size,number of feature,activation="sigmoid")(cmain_input)
 maxpooling=Reshape((cnn_output_length,cnn_output_dim))(cnnco)
-co=cocnnattention(co_attention output dim)([wembed,maxpooling])
+co=cocnnattention(co_attention_output_dim)([wembed,maxpooling])
 co=Flatten()(co)
 
 merged_vector=keras.layers.concatenate([co,gco,rnnoutput])
