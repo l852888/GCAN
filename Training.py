@@ -5,7 +5,7 @@
 
 
 #data preparation
-matrix=cos
+matrix=cos   #cos is calculated from data_preparation.py, use the user profile to calculate their cosine similarity for building the graph
 graph_conv_filters=preprocess_adj_tensor(matrix)
 
 #evaluation
@@ -57,6 +57,7 @@ def recall(y_true, y_pred):
 #training GCAN model
 y=pd.read_csv(r".csv")
 y=y[0:dataset size]
+
 from sklearn.model_selection import train_test_split
 X_train,X_test,y_train,y_test=train_test_split(data_all,y,test_size=0.3,random_state= )
 WX_train,WX_test,y_train,y_test=train_test_split(padded_docs,y,test_size=0.3,random_state= )
@@ -64,6 +65,12 @@ MX_train,MX_test,y_train,y_test=train_test_split(graph_conv_filters,y,test_size=
     
 cnnX_train=np.reshape(X_train,(training size,retweet user size,number of feature,1))
 cnnX_test=np.reshape(X_test,(testing size,retweet user size,number of feature,1))
+
+from keras.utils.np_utils import to_categorical
+y_train= to_categorical(y_train,2)
+y_train= y_train.astype('int')
+y_test= to_categorical(y_test,2)
+y_test= y_test.astype('int')
     
 num_filters = 1
 
@@ -75,7 +82,7 @@ wembed=Reshape((source_tweet_length,source_tweet_output_dim))(wembed)  #source_t
 wembed=GRU(source_tweet_output_dim,return_sequences=True)(wembed)
 
 #user propagation representation
-rmain_input =Input(shape=(retweet_user_size,number of feature)) #number of feature: in the paper is 10
+rmain_input =Input(shape=(retweet_user_size,number of feature)) #number of feature: in the paper is 10, retweet_user_size: in the paper is 40
 rnnencoder=GRU(output_dim,return_sequences=True)(rmain_input)
 rnnoutput1= AveragePooling1D(retweet_user_size)(rnnencoder)
 rnnoutput=Flatten()(rnnoutput1)
@@ -99,14 +106,14 @@ merged_vector=keras.layers.concatenate([co,gco,rnnoutput])
 x=Dense(output_dim,activation="relu")(merged_vector)
 x=Dense(output_dim,activation="relu")(x)
 x=Dense(output_dim,activation="relu")(x)
-prediction=Dense(1,activation="softmax")(x)
+prediction=Dense(2,activation="softmax")(x) #Here is output:class{0,1}
     
 model=Model([winput,rmain_input,cmain_input, graph_conv_filters_input],prediction)
 model.summary()
   
 from keras import optimizers
 Adam=keras.optimizers.Adam(lr=0.001, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0, amsgrad=False)
-model.compile(optimizer=Adam,loss="binary_crossentropy",metrics=['accuracy', f1_score,precision,recall])
+model.compile(optimizer=Adam,loss="categorical_crossentropy",metrics=['accuracy', f1_score,precision,recall])
 from keras.callbacks import EarlyStopping
 early_stopping = EarlyStopping(monitor='val_loss', patience=5, verbose=2)
 history=model.fit([np.array(WX_train),np.array(X_train),np.array(cnnX_train),np.array(MX_train)],np.array(y_train),epochs=50,validation_split=0.1, callbacks=[early_stopping])
