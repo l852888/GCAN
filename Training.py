@@ -4,10 +4,9 @@
 # In[ ]:
 
 
-#data preparation
-matrix=cos   #cos is calculated from data_preparation.py, use the user profile to calculate their cosine similarity for building the graph
-graph_conv_filters=preprocess_adj_tensor(matrix)
 
+
+#==================================================================================================#
 #evaluation
 def f1_score(y_true, y_pred):
     #calculate tp、tn、fp、fn
@@ -53,8 +52,12 @@ def recall(y_true, y_pred):
     f1 = 2*p*r / (p+r+K.epsilon())
     f1 = tf.where(tf.is_nan(f1), tf.zeros_like(f1), f1)
     return r
+#=======================================================================================#
+##==start to build and train GCAN model==##
 
-#training GCAN model
+#data preparation
+matrix=cos   #cos is calculated from data_preparation.py, use the user profile to calculate their cosine similarity for building the graph
+graph_conv_filters=preprocess_adj_tensor(matrix)
 y=pd.read_csv(r".csv")
 y=y[0:dataset size]
 
