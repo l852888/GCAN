@@ -108,7 +108,7 @@ gco=coattention(co_attention_output_dim)([wembed,gmain_input])
 gco=Flatten()(gco)
     
 cmain_input=Input(shape=(retweet_user_size,number_of_feature,1))
-cnnco=Conv2D(cnn_output_dim,filter_size,number_of_feature,activation="sigmoid")(cmain_input)
+cnnco=Conv2D(cnn_output_dim,kernel_size=(filter_size,number_of_feature),activation="sigmoid")(cmain_input)
 maxpooling=Reshape((cnn_output_length,cnn_output_dim))(cnnco)
 co=cocnnattention(co_attention_output_dim)([wembed,maxpooling])
 co=Flatten()(co)
